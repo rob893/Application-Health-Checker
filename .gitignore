@@ -1,0 +1,5 @@
+healthchecksdb
+.vs/
+bin/
+obj/
+**/appsettings.json
