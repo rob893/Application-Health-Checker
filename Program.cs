@@ -1,7 +1,7 @@
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Hosting;
 
-namespace WorkoutApp.HealthChecker
+namespace HealthChecker
 {
     public class Program
     {

@@ -1,3 +1,6 @@
+using HealthChecker.HealthChecks;
+using HealthChecker.Helpers;
+using HealthChecker.Models.Settings;
 using HealthChecks.UI.Client;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Diagnostics.HealthChecks;
@@ -6,9 +9,8 @@ using Microsoft.AspNetCore.HttpOverrides;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
-using WorkoutApp.HealthChecker.HealthChecks;
 
-namespace WorkoutApp.HealthChecker
+namespace HealthChecker
 {
     public class Startup
     {
@@ -22,6 +24,8 @@ namespace WorkoutApp.HealthChecker
 
         public void ConfigureServices(IServiceCollection services)
         {
+            services.Configure<BasicAuthSettings>(Configuration.GetSection("BasicAuthSettings"));
+
             services.AddHttpClient();
             services.AddHealthChecksUI();
             services.AddHealthChecks()
@@ -35,6 +39,8 @@ namespace WorkoutApp.HealthChecker
             {
                 app.UseDeveloperExceptionPage();
             }
+
+            app.UseBasicAuthForUI();
 
             app.UseForwardedHeaders(new ForwardedHeadersOptions
             {
