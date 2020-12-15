@@ -1,0 +1,5 @@
+{
+    "appService.preDeployTask": "publish-release",
+    "appService.deploySubpath": "ApplicationHealthChecker\\bin\\Release\\netcoreapp3.1\\publish",
+    "appService.defaultWebAppToDeploy": "/subscriptions/6ad65839-cae9-4db7-abee-f5f6b93bab39/resourceGroups/rherber-development/providers/Microsoft.Web/sites/rherber-application-health-checker"
+}
