@@ -27,7 +27,7 @@ namespace HealthChecker
             services.Configure<BasicAuthSettings>(Configuration.GetSection("BasicAuthSettings"));
 
             services.AddHttpClient();
-            services.AddHealthChecksUI();
+            services.AddHealthChecksUI().AddSqliteStorage($"Data Source=sqlite.db");
             services.AddHealthChecks()
                 .AddCheck<GQLHealthCheck>("gql_health_check", tags: new[] { "gql" });
         }

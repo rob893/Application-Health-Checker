@@ -1,5 +1,6 @@
 healthchecksdb
+sqlite.db
 .vs/
 bin/
 obj/
-**/appsettings.json
+**/appsettings.Secrets.json
