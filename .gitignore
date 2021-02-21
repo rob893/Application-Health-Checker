@@ -4,3 +4,4 @@ sqlite.db
 bin/
 obj/
 **/appsettings.Secrets.json
+dist/
