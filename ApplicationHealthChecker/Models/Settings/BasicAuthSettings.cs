@@ -1,10 +1,10 @@
-namespace HealthChecker.Models.Settings
+namespace ApplicationHealthChecker.Models.Settings
 {
-    public class BasicAuthSettings
+    public record BasicAuthSettings
     {
-        public string Username { get; set; }
-        public string Password { get; set; }
-        public bool RequireAuth { get; set; }
-        public bool Enabled { get; set; }
+        public string Username { get; init; } = default!;
+        public string Password { get; init; } = default!;
+        public bool RequireAuth { get; init; }
+        public bool Enabled { get; init; }
     }
 }

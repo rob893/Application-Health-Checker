@@ -3,7 +3,7 @@ using System.Threading;
 using System.Threading.Tasks;
 using Microsoft.Extensions.Diagnostics.HealthChecks;
 
-namespace HealthChecker.HealthChecks
+namespace ApplicationHealthChecker.HealthChecks
 {
     public class GQLHealthCheck : IHealthCheck
     {

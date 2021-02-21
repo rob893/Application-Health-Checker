@@ -2,11 +2,11 @@ using System;
 using System.Net;
 using System.Text;
 using System.Threading.Tasks;
-using HealthChecker.Models.Settings;
+using ApplicationHealthChecker.Models.Settings;
 using Microsoft.AspNetCore.Http;
 using Microsoft.Extensions.Options;
 
-namespace HealthChecker.Middleware
+namespace ApplicationHealthChecker.Middleware
 {
     public class BasicAuthMiddleware
     {
@@ -44,7 +44,7 @@ namespace HealthChecker.Middleware
                     var encodedUsernamePassword = authHeader.Split(' ', 2, StringSplitOptions.RemoveEmptyEntries)[1]?.Trim();
 
                     // Decode from Base64 to string
-                    var decodedUsernamePassword = Encoding.UTF8.GetString(Convert.FromBase64String(encodedUsernamePassword));
+                    var decodedUsernamePassword = Encoding.UTF8.GetString(Convert.FromBase64String(encodedUsernamePassword ?? ""));
 
                     // Split username and password
                     var username = decodedUsernamePassword.Split(':', 2)[0];

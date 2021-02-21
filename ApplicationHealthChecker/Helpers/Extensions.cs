@@ -1,7 +1,7 @@
-using HealthChecker.Middleware;
+using ApplicationHealthChecker.Middleware;
 using Microsoft.AspNetCore.Builder;
 
-namespace HealthChecker.Helpers
+namespace ApplicationHealthChecker.Helpers
 {
     public static class Extensions
     {

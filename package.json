@@ -1,0 +1,19 @@
+{
+  "scripts": {
+    "start": "cd ApplicationHealthChecker && dotnet watch run",
+    "test": "dotnet test",
+    "update-dependencies": "dotnet outdated -u",
+    "outdated": "dotnet outdated",
+    "clean-dist": "rm -rf ApplicationHealthChecker/dist",
+    "build": "npm run clean-dist-api && cd ApplicationHealthChecker && dotnet publish -c=Debug -o dist",
+    "build-prod": "npm run clean-dist && cd ApplicationHealthChecker && dotnet publish -c=Release -o dist",
+    "download-secrets": "scp root@rwherber.com:/var/www/html/APIs/SettingsFiles/ApplicationHealthChecker/appsettings.Secrets.json ./ApplicationHealthChecker",
+    "upload-secrets": "scp ./ApplicationHealthChecker/appsettings.Secrets.json root@rwherber.com:/var/www/html/APIs/SettingsFiles/ApplicationHealthChecker",
+    "view-logs-digital-ocean": "ssh root@rwherber.com \"sudo journalctl -fu ApplicationHealthChecker.service\"",
+    "clean-digital-ocean": "ssh root@rwherber.com \"rm -rf /var/www/html/APIs/ApplicationHealthChecker/*\"",
+    "copy-dist-to-digital-ocean": "scp -r ./ApplicationHealthChecker/dist/* root@rwherber.com:/var/www/html/APIs/ApplicationHealthChecker",
+    "copy-service-file-to-digital-ocean": "scp ./CI/ApplicationHealthChecker.service root@rwherber.com:/etc/systemd/system",
+    "restart-digital-ocean-service": "ssh root@rwherber.com \"sudo systemctl stop ApplicationHealthChecker.service; sudo systemctl enable ApplicationHealthChecker.service; sudo systemctl start ApplicationHealthChecker.service\"",
+    "deploy-to-digital-ocean": "npm run build-prod && npm run clean-digital-ocean && npm run copy-dist-to-digital-ocean && npm run copy-service-file-to-digital-ocean && npm run restart-digital-ocean-service"
+  }
+}

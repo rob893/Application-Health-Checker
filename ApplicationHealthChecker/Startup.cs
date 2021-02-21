@@ -1,6 +1,6 @@
-using HealthChecker.HealthChecks;
-using HealthChecker.Helpers;
-using HealthChecker.Models.Settings;
+using ApplicationHealthChecker.HealthChecks;
+using ApplicationHealthChecker.Helpers;
+using ApplicationHealthChecker.Models.Settings;
 using HealthChecks.UI.Client;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Diagnostics.HealthChecks;
@@ -10,7 +10,7 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 
-namespace HealthChecker
+namespace ApplicationHealthChecker
 {
     public class Startup
     {
