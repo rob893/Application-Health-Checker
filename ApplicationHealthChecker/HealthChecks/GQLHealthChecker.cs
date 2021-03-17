@@ -19,7 +19,7 @@ namespace ApplicationHealthChecker.HealthChecks
         {
             var client = clientFactory.CreateClient();
 
-            var res = await client.GetAsync("http://localhost:4000/.well-known/apollo/server-health");
+            var res = await client.GetAsync("http://localhost:4000/.well-known/apollo/server-health", cancellationToken);
 
             var healthCheckResultHealthy = res.IsSuccessStatusCode;
 

@@ -13,7 +13,7 @@
     "clean-digital-ocean": "ssh root@rwherber.com \"rm -rf /var/www/html/APIs/ApplicationHealthChecker/*\"",
     "copy-dist-to-digital-ocean": "scp -r ./ApplicationHealthChecker/dist/* root@rwherber.com:/var/www/html/APIs/ApplicationHealthChecker",
     "copy-service-file-to-digital-ocean": "scp ./CI/ApplicationHealthChecker.service root@rwherber.com:/etc/systemd/system",
-    "restart-digital-ocean-service": "ssh root@rwherber.com \"sudo systemctl stop ApplicationHealthChecker.service; sudo systemctl enable ApplicationHealthChecker.service; sudo systemctl start ApplicationHealthChecker.service\"",
+    "restart-digital-ocean-service": "ssh root@rwherber.com \"sudo systemctl stop ApplicationHealthChecker.service; sudo systemctl enable ApplicationHealthChecker.service; sudo systemctl start ApplicationHealthChecker.service; sudo systemctl daemon-reload\"",
     "deploy-to-digital-ocean": "npm run build-prod && npm run clean-digital-ocean && npm run copy-dist-to-digital-ocean && npm run copy-service-file-to-digital-ocean && npm run restart-digital-ocean-service"
   }
 }
