@@ -48,7 +48,7 @@ namespace ApplicationHealthChecker.Middleware
                 }
 
                 string authHeader = context.Request.Headers["Authorization"];
-                if (authHeader.StartsWith("Basic ", StringComparison.Ordinal))
+                if (!string.IsNullOrWhiteSpace(authHeader) && authHeader.StartsWith("Basic ", StringComparison.Ordinal))
                 {
                     // Get the encoded username and password
                     var encodedUsernamePassword = authHeader.Split(' ', 2, StringSplitOptions.RemoveEmptyEntries)[1]?.Trim();
@@ -63,7 +63,7 @@ namespace ApplicationHealthChecker.Middleware
                     // Check if login is correct
                     if (IsAuthorized(username, password, settings))
                     {
-                        await next.Invoke(context);
+                        await this.next.Invoke(context);
                         return;
                     }
                 }
@@ -76,11 +76,11 @@ namespace ApplicationHealthChecker.Middleware
             }
             else
             {
-                await next.Invoke(context);
+                await this.next.Invoke(context);
             }
         }
 
-        public bool IsAuthorized(string username, string password, BasicAuthSettings settings)
+        public static bool IsAuthorized(string username, string password, BasicAuthSettings settings)
         {
             if (username == null)
             {
