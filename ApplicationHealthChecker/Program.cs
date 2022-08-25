@@ -1,10 +1,12 @@
+using System;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.Hosting;
 
+[assembly: CLSCompliant(false)]
 namespace ApplicationHealthChecker
 {
-    public class Program
+    public static class Program
     {
         public static void Main(string[] args)
         {

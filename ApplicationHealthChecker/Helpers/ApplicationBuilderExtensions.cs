@@ -3,7 +3,7 @@ using Microsoft.AspNetCore.Builder;
 
 namespace ApplicationHealthChecker.Helpers
 {
-    public static class Extensions
+    public static class ApplicationBuilderExtensions
     {
         public static IApplicationBuilder UseBasicAuthForUI(this IApplicationBuilder builder)
         {

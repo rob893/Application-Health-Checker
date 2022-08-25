@@ -20,10 +20,20 @@ namespace ApplicationHealthChecker.Middleware
 
         public async Task InvokeAsync(HttpContext context, IOptions<BasicAuthSettings> swaggerAuthSettings)
         {
+            if (context == null)
+            {
+                throw new ArgumentNullException(nameof(context));
+            }
+
+            if (swaggerAuthSettings == null)
+            {
+                throw new ArgumentNullException(nameof(swaggerAuthSettings));
+            }
+
             var settings = swaggerAuthSettings.Value;
 
             //Make sure we are hitting the swagger path, and not doing it locally as it just gets annoying :-)
-            if (context.Request.Path.StartsWithSegments("/healthchecks-ui"))
+            if (context.Request.Path.StartsWithSegments("/healthchecks-ui", StringComparison.Ordinal))
             {
                 if (!settings.Enabled)
                 {
@@ -33,12 +43,12 @@ namespace ApplicationHealthChecker.Middleware
 
                 if (!settings.RequireAuth)
                 {
-                    await next.Invoke(context);
+                    await this.next.Invoke(context);
                     return;
                 }
 
                 string authHeader = context.Request.Headers["Authorization"];
-                if (authHeader != null && authHeader.StartsWith("Basic "))
+                if (authHeader.StartsWith("Basic ", StringComparison.Ordinal))
                 {
                     // Get the encoded username and password
                     var encodedUsernamePassword = authHeader.Split(' ', 2, StringSplitOptions.RemoveEmptyEntries)[1]?.Trim();
@@ -72,8 +82,23 @@ namespace ApplicationHealthChecker.Middleware
 
         public bool IsAuthorized(string username, string password, BasicAuthSettings settings)
         {
+            if (username == null)
+            {
+                throw new ArgumentNullException(nameof(username));
+            }
+
+            if (password == null)
+            {
+                throw new ArgumentNullException(nameof(password));
+            }
+
+            if (settings == null)
+            {
+                throw new ArgumentNullException(nameof(settings));
+            }
+
             // Check that username and password are correct
-            return username.Equals(settings.Username, StringComparison.InvariantCultureIgnoreCase) && password.Equals(settings.Password);
+            return username.Equals(settings.Username, StringComparison.OrdinalIgnoreCase) && password.Equals(settings.Password, StringComparison.Ordinal);
         }
     }
 }

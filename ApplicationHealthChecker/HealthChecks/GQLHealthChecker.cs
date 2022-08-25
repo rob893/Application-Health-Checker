@@ -1,3 +1,4 @@
+using System;
 using System.Net.Http;
 using System.Threading;
 using System.Threading.Tasks;
@@ -17,9 +18,9 @@ namespace ApplicationHealthChecker.HealthChecks
 
         public async Task<HealthCheckResult> CheckHealthAsync(HealthCheckContext context, CancellationToken cancellationToken = default)
         {
-            var client = clientFactory.CreateClient();
+            var client = this.clientFactory.CreateClient();
 
-            var res = await client.GetAsync("http://localhost:4000/.well-known/apollo/server-health", cancellationToken);
+            var res = await client.GetAsync(new Uri("http://localhost:4000/.well-known/apollo/server-health"), cancellationToken);
 
             var healthCheckResultHealthy = res.IsSuccessStatusCode;
 
